@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class dropCylinder : MonoBehaviour
 {
@@ -24,10 +25,10 @@ public class dropCylinder : MonoBehaviour
             if (Physics.Raycast(ray.origin, ray.direction, out hitInfo))
             {
                 Instantiate(obstacle, hitInfo.point, obstacle.transform.rotation);
-                //foreach (GameObject a in agents)
-                //{
-
-                //}
+                foreach (GameObject a in agents)
+                {
+                    a.GetComponent<AIControl>().DetectNewObstacle(hitInfo.point);
+                }
             }
         }
     }
